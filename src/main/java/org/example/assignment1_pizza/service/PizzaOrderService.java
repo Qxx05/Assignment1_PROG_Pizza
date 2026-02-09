@@ -64,7 +64,7 @@ public class PizzaOrderService {
         }
 
         double afterDiscount = subtotal - discount + deliveryFee;
-        double tax = afterDiscount = 0.13;
+        double tax = afterDiscount * 0.13;
         double total = afterDiscount + tax;
 
         // save the results in model

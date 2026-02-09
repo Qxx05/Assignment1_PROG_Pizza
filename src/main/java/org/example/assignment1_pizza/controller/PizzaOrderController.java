@@ -34,7 +34,7 @@ public class PizzaOrderController {
 
         // dropdown values
         model.addAttribute("sizes", List.of("SMALL", "MEDIUM", "LARGE"));
-        model.addAttribute("crust", List.of("THIN", "REGULAR", "THICK"));
+        model.addAttribute("crusts", List.of("THIN", "REGULAR", "THICK"));
 
         // checkbox
         model.addAttribute("toppings", List.of("PEPPERONI", "MUSHROOMS", "OLIVES", "ONIONS", "JALAPENO", "PEPPERS"));
