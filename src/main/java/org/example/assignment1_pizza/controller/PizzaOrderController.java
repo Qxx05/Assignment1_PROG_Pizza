@@ -47,15 +47,30 @@ public class PizzaOrderController {
     @PostMapping("/order")
     public String submitOrder(@ModelAttribute("pizzaOrder") PizzaOrder pizzaOrder, Model model) {
 
+        if (pizzaOrder.getCustomerName() == null || pizzaOrder.getCustomerName().equals("")) {
+            model.addAttribute("error", "customer name must not be empty");
+            addFormLists(model);
+            return "orderForm";
+        }
+
+        if (pizzaOrder.isDelivery()) {
+            if (pizzaOrder.getDeliveryAddress() == null || pizzaOrder.getDeliveryAddress().equals("")) {
+                model.addAttribute("error", "Delivery address required if delivery is selected!");
+                addFormLists(model);
+                return "orderForm";
+            }
+        }
+
         PizzaOrder savedOrder = service.placeOrder(pizzaOrder);
 
-        // send data to logs
         model.addAttribute("order", savedOrder);
-        if (savedOrder.getToppings() == null) {
-            model.addAttribute("toppingsText", "");
-        } else {
-            model.addAttribute("toppingsText", String.join(", ", savedOrder.getToppings()));
+
+        if (savedOrder.getToppings() == null || savedOrder.getToppings().size() == 0) {
+            model.addAttribute("toppingsText", "None");
+        }else {
+            model.addAttribute("toppingsText", savedOrder.getToppings().toString());
         }
+
 
         // load summary.html
         return "summary";
@@ -68,5 +83,11 @@ public class PizzaOrderController {
         model.addAttribute("orders", service.getAllOrders());
 
         return "history";
+    }
+
+    private void addFormLists(Model model) {
+        model.addAttribute("sizes", List.of("SMALL", "MEDIUM", "LARGE"));
+        model.addAttribute("crusts", List.of("THIN", "REGULAR", "THICK"));
+        model.addAttribute("toppings", List.of("PEPPERONI", "MUSHROOM", "OLIVES", "ONIONS", "JALAPENO", "PEPPERS"));
     }
 }

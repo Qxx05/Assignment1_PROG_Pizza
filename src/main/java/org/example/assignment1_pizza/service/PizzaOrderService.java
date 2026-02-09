@@ -35,12 +35,12 @@ public class PizzaOrderService {
     // pricing logic
     private void calculatePrices(PizzaOrder order) {
 
-        double basePrice = 0;
+        double basePrice = 0.0;
 
         // base price update depending on size ordered
-        if (order.getSize().equals("SMALL")) basePrice = 8;
-        if (order.getSize().equals("MEDIUM")) basePrice = 10;
-        if (order.getSize().equals("LARGE")) basePrice = 12;
+        if (order.getSize().equals("SMALL")) basePrice = 8.00;
+        if (order.getSize().equals("MEDIUM")) basePrice = 10.00;
+        if (order.getSize().equals("LARGE")) basePrice = 12.00;
 
         // toppings cost
         int toppingCount = 0;
@@ -49,27 +49,26 @@ public class PizzaOrderService {
         }
 
         double toppingsCost = toppingCount * 1.25;
-        double subtotal = (basePrice + toppingsCost) * order.getQuantity();
+        double unitPrice = basePrice + toppingsCost;
+        double pizzaSubtotal = unitPrice * order.getQuantity();
+        double discount = 0.0;
 
-        // discounts
-        double discount = 0;
         if (order.getQuantity() > 3) {
-            discount = subtotal * 0.10;
+            discount = pizzaSubtotal * 0.10;
         }
 
-        // delivery fee
-        double deliveryFee = 0;
+        double afterDiscountPizza = pizzaSubtotal - discount;
+
+        double deliveryFee = 0.0;
         if (order.isDelivery()) {
             deliveryFee = 3.99;
         }
 
-        double afterDiscount = subtotal - discount;
-        double beforeTax = afterDiscount + deliveryFee;
+        double beforeTax = afterDiscountPizza + deliveryFee;
         double tax = beforeTax * 0.13;
         double total = beforeTax + tax;
 
-        // save the results in model
-        order.setSubtotal(round(subtotal));
+        order.setSubtotal(round(pizzaSubtotal));
         order.setDiscountAmount(round(discount));
         order.setTax(round(tax));
         order.setTotal(round(total));

@@ -56,7 +56,11 @@ public class PizzaOrder {
     }
 
     public void setToppings(List<String> toppings) {
-        this.toppings = toppings;
+        if (toppings == null) {
+            this.toppings = new ArrayList<>();
+        }else {
+            this.toppings = toppings;
+        }
     }
 
     public int getQuantity() {

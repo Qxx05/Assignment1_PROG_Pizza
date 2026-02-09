@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xlmns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Order Summary</title>
@@ -11,14 +11,22 @@
 <p> Name: <span th:text="${order.customerName}"></span></p>
 <p> Size: <span th:text="${order.size}"></span></p>
 <p> Crust: <span th:text="${order.crust}"></span></p>
-<p> Toppings: <span th:text="${order.toppings}"></span></p>
+<p> Toppings: <span th:text="${toppingsText}"></span></p>
 <p> Quantity: <span th:text="${order.quantity}"></span></p>
 <p> Subtotal: $<span th:text="${order.subtotal}"></span></p>
 <p> Discount: $<span th:text="${order.discountAmount}"></span></p>
 <p> Tax: <span th:text="${order.tax}"></span></p>
 <p> Total: $<span th:text="${order.total}"></span></p>
-<p> Delivery Fee: $3.99  <span th:text="${order.delivery}"></span></p>
-<p> Address: <span th:text="${order.deliveryAddress}"></span></p>
+
+<p>
+    Delivery Fee:
+    <span th:if="${order.delivery}" th:text="'$3.99'"></span>
+    <span th:if="${!order.delivery}" th:text="'$0.00'"></span>
+</p>
+
+<p th:if="${order.delivery}">
+    Delivery Address: <span th:text="${order.deliveryAddress}"></span>
+</p>
 
 <a href="/order">New Order</a>
 <br>
