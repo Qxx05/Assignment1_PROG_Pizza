@@ -5,6 +5,7 @@ import org.example.assignment1_pizza.model.PizzaOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,8 @@ public class PizzaOrderService {
     public PizzaOrder placeOrder(PizzaOrder order) {
         order.setId(nextId);
         nextId++;
+
+        order.setOrderTime(new Date().toString());
 
         calculatePrices(order);
 
