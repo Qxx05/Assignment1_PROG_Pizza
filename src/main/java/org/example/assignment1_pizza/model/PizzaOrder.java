@@ -14,6 +14,8 @@ public class PizzaOrder {
     private boolean delivery;
     private String deliveryAddress;
 
+    private String orderTime;
+
     private double subtotal;
     private double discountAmount;
     private double tax;
@@ -89,6 +91,14 @@ public class PizzaOrder {
 
     public double getSubtotal() {
         return subtotal;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
     }
 
     public void setSubtotal(double subtotal) {
