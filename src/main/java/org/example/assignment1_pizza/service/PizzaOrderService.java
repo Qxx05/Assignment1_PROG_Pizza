@@ -16,6 +16,10 @@ public class PizzaOrderService {
     // id counter
     private int nextId = 1;
 
+    public List<PizzaOrder> getAllOrders() {
+        return orders;
+    }
+
     // method to place order
     public PizzaOrder placeOrder(PizzaOrder order) {
         order.setId(nextId);
