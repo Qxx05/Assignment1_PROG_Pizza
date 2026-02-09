@@ -45,7 +45,11 @@ public class PizzaOrderService {
         // toppings cost
         int toppingCount = 0;
         if (order.getToppings() != null) {
-            toppingCount = order.getToppings().size();
+            for (String t : order.getToppings()) {
+                if (t != null && !t.equals("")){
+                    toppingCount++;
+                }
+            }
         }
 
         double toppingsCost = toppingCount * 1.25;
