@@ -10,6 +10,7 @@
 <table border="1">
     <tr>
         <th>ID</th>
+        <th>Order Time</th>
         <th>Name</th>
         <th>Size</th>
         <th>Total</th>
@@ -17,6 +18,7 @@
 
     <tr th:each="o: ${orders}">
         <td th:text="${o.id}"></td>
+        <td th:text="${o.orderTime}"></td>
         <td th:text="${o.customerName}"></td>
         <td th:text="${o.size}"></td>
         <td th:text="${o.total}"></td>
