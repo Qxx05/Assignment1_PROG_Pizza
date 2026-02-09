@@ -63,12 +63,13 @@ public class PizzaOrderService {
             deliveryFee = 3.99;
         }
 
-        double afterDiscount = subtotal - discount + deliveryFee;
-        double tax = afterDiscount * 0.13;
-        double total = afterDiscount + tax;
+        double afterDiscount = subtotal - discount;
+        double beforeTax = afterDiscount + deliveryFee;
+        double tax = beforeTax * 0.13;
+        double total = beforeTax + tax;
 
         // save the results in model
-        order.setSubtotal(round(afterDiscount));
+        order.setSubtotal(round(subtotal));
         order.setDiscountAmount(round(discount));
         order.setTax(round(tax));
         order.setTotal(round(total));

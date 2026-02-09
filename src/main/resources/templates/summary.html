@@ -16,7 +16,8 @@
 <p> Subtotal: $<span th:text="${order.subtotal}"></span></p>
 <p> Discount: $<span th:text="${order.discountAmount}"></span></p>
 <p> Tax: <span th:text="${order.tax}"></span></p>
-<p> Delivery: <span th:text="${order.delivery}"></span></p>
+<p> Total: $<span th:text="${order.total}"></span></p>
+<p> Delivery Fee: $3.99  <span th:text="${order.delivery}"></span></p>
 <p> Address: <span th:text="${order.deliveryAddress}"></span></p>
 
 <a href="/order">New Order</a>
